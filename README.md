@@ -10,7 +10,7 @@ A legal practice management SaaS platform serving small-to-mid-size law firms ne
 
 - [Business Requirements Document (BRD)](./docs/BRD_ConflictCheck_v1.md) — the business case: situation, problem, objective, scope, stakeholders, success criteria
 - [Functional Requirements Document (FRD)](./docs/FRD_ConflictCheck_v1.md) — the technical blueprint: data model, business rules/trigger logic, roles & permissions, user stories
-- - [Data Dictionary](./docs/Data_Dictionary_ConflictCheck_v1.md) — plain-language field definitions for a legal-domain audience
+- [Data Dictionary](./docs/Data_Dictionary_ConflictCheck_v1.md) — plain-language field definitions for a legal-domain audience
 - Status-flow diagram (below) — visualizes the Draft → Conflict Check → Active enforcement logic
 
 ## Status Flow

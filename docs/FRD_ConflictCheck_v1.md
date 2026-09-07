@@ -54,9 +54,11 @@ This document translates the business requirement in the BRD — no matter proce
 ## 3. Business Rule / Trigger Logic
 
 **Rule 1 — Status gate:**
-> A Matter record's Status field cannot be changed to "Active" unless its linked Conflict Check record exists and has a Result value of "Cleared."
+> A Matter record's Status field cannot be changed to "Active" or "Closed" unless its linked Conflict Check record exists and has a Result value of "Cleared."
 
-*Plain-language version:* the system blocks the status change and returns an error message to the user if someone tries to activate a matter before the conflict check is cleared.
+*Plain-language version:* the system blocks the status change and returns an error message to the user if someone tries to activate or close a matter before the conflict check is cleared.
+
+*Scope note (added 9/6/26):* extended beyond the original literal requirement (which only named Active) to also cover Closed, so a Matter can't be closed out while its conflict check remains unresolved either. The same underlying check — Result is not equal to Cleared — governs both transitions.
 
 **Rule 2 — Permission gate on clearing:**
 > Only users with the "Compliance" or "Partner" role may set a Conflict Check record's Result field to "Cleared."
@@ -65,6 +67,8 @@ This document translates the business requirement in the BRD — no matter proce
 
 **Rule 3 — Flagged result handling:**
 > If a Conflict Check's Result is set to "Flagged — Needs Review" or "Conflict Identified," the related Matter's Status remains locked at "Draft" and cannot be changed by any user until the Conflict Check record is updated to "Cleared."
+
+*Implementation note (added 9/6/26):* enforced via Rule 1's Validation Rule — no separate rule needed. Since Matter's Status field has only three possible values (Draft / Active / Closed), "remains locked at Draft" and "cannot be changed by any user" is equivalent to "cannot become Active or Closed," which Rule 1 already blocks whenever Result is not Cleared. Documented here as a distinct rule because it describes a different stakeholder concern (the consequence of a flagged result) than Rule 1 (the forward-looking gate) — but both are satisfied by the single Validation Rule built for Rule 1.
 
 ## 4. Roles & Permissions Summary
 

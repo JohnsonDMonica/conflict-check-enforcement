@@ -30,6 +30,8 @@ Ensure that no new client matter can become active in the system until a conflic
 - Capturing who performed the check, when, and the result
 - Restricting who is authorized to mark a conflict check as "Cleared"
 
+*Scope note (added 9/6/26):* during implementation, this requirement was extended to also block a Matter from being marked Closed while its conflict check remains unresolved — not just Active. The same underlying risk (a matter proceeding, or being closed out, without proper review) applies to both transitions, so both are enforced by the same mechanism. See companion FRD, Rule 1.
+
 **Out of scope (for this phase):**
 - Automating the conflict search itself (i.e., actually cross-referencing client/related-party names against existing records) — this phase enforces that a human-reviewed check occurred and was documented, not that the search process itself is automated
 - Billing integration, or automated document-generation/e-signature workflows for engagement letters — this phase covers manual tracking of signing status and secure document storage, not automated generation or e-signature platform integration *(scope revised July 29, 2026 — see FRD for expanded Engagement Letter data model)*
@@ -48,6 +50,8 @@ Ensure that no new client matter can become active in the system until a conflic
 - Zero matters reach Active status without a documented, cleared conflict check on record
 - Compliance can produce an audit trail (who checked, when, result) for any matter on request
 - Intake staff can complete the required steps without needing to remember the rule manually — the system itself blocks the wrong sequence
+
+*Added 9/6/26:* the first criterion applies equally to Closed status — zero matters can be closed out with an unresolved conflict check either, per the Section 4 scope extension above.
 
 ## 7. Assumptions & Constraints
 

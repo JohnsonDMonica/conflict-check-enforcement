@@ -79,6 +79,19 @@ This document translates the business requirement in the BRD — no matter proce
 | Partner | Yes | Yes | Yes | Yes |
 | Attorney (non-Partner) | View only | View only | No | No |
 
+*Gap identified and closed (added 9/6/26):* the original table above never addressed Engagement Letter access at all. Added below, reasoned through by role:
+
+| Role | Create | Read | Edit | Delete |
+|---|---|---|---|---|
+| Intake Coordinator | No | Yes | No | No |
+| Compliance | No | Yes | No | No |
+| Partner | Yes | Yes | Yes | No |
+| Attorney (non-Partner) | Yes | Yes | Yes | No |
+
+Reasoning: Intake Coordinator's job ends at intake (Client/Matter/Conflict Check setup) and never plausibly extends to drafting or managing an engagement letter, so View-only is appropriate here despite Intake Coordinator having Create access elsewhere. Compliance needs visibility for audit purposes (FR-5) but no operational need to create or edit engagement letters. Partner retains full access, consistent with the rest of the table. Attorney is a deliberate exception to their "View only" pattern everywhere else: as the person actually assigned to and managing a given matter (Responsible Attorney), an attorney needs to create, send, and update the engagement letter for their own matters — View-only would make it impossible for them to do work the role clearly requires.
+
+*Delete permission, addressed for the first time across the entire system (added 9/6/26):* the original table never specified Delete for any role, on any object. Decision: Delete remains unchecked for all four roles above, across every object (Client, Matter, Conflict Check, Engagement Letter) — reserved exclusively for the System Administrator profile, which already exists in the org by default and requires no additional configuration. Rationale: none of the four business roles' actual responsibilities require permanently removing a record, and unrestricted delete access would undermine the audit trail FR-5 requires — Compliance being able to view conflict-check history on request has little value if records can also be deleted by the people being audited. Reserving Delete for a dedicated system-administration function, separate from all four legal-practice roles, follows the Principle of Least Privilege: no role holds a permission its actual job never requires.
+
 ## 5. Functional Requirements List (User Story Format)
 
 - **FR-1:** As an Intake Coordinator, I need to create a new Client and Matter record so that a new engagement can begin being tracked.
